@@ -15,14 +15,14 @@ st.caption(
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    purchase = st.number_input("Цена покупки", min_value=1_000_000, step=100_000)
+    purchase = st.number_input("Цена покупки", min_value=7_000_000, step=100_000)
 with col2:
-    expenses = st.number_input("Расходы", step=100_000)
+    expenses = st.number_input("Расходы", value=1_000_000, step=100_000)
     confirmed_share = st.slider(
         "Процент расходов, подтвержденный чеками", value=50, max_value=100, step=10
     )
 with col3:
-    sale = st.number_input("Продажа", min_value=1_000_000, step=100_000)
+    sale = st.number_input("Продажа", min_value=10_000_000, step=100_000)
 
 if sale < purchase + expenses:
     st.error("Стоимость продажи должна быть больше суммы покупки и расходов")
@@ -61,10 +61,11 @@ for regime_name, regime in regimes.items():
         if USN
         else regime["default_rate"]
     )
-    regime["tax"] = (regime["base"] + (1 if USN else 0)) * regime["rate"] / 100
+    regime["tax"] = regime["base"] * regime["rate"] / 100 + sale * (0.01 if USN else 0)
     regime["profit"] = sale - purchase - expenses - regime["tax"]
 
 st.subheader("Расчет налогов и чистой прибыли")
+
 
 df: pd.DataFrame = (
     pd.DataFrame(regimes)
@@ -74,7 +75,7 @@ df: pd.DataFrame = (
         columns={
             "base": "Налоговая база",
             "rate": "Ставка налога",
-            "tax": "Налог",
+            "tax": "Налог*",
             "profit": "Чистая прибыль",
         }
     )
@@ -82,4 +83,5 @@ df: pd.DataFrame = (
 
 
 st.dataframe(df.style.format(thousands=" "), use_container_width=True)
-st.bar_chart(df, y="Налог", use_container_width=True)
+st.caption("*Рачет налога на УСН включает 1% социальных взносов.")
+st.bar_chart(df, y="Налог*", use_container_width=True)
