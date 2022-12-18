@@ -86,5 +86,6 @@ st.dataframe(df.style.format(thousands=" "), use_container_width=True)
 st.caption("*Рачет налога на УСН включает 1% социальных взносов.")
 st.bar_chart(df, y="Налог*", use_container_width=True)
 
-
 st.write('Еще больше полезного на канале "Инвестиции в редевелопмент": https://t.me/flipping_invest')
+
+st.write("Предложения по работе этого калькулятора можно оставлять в комментариях к этому посту: https://t.me/flipping_invest/130")
