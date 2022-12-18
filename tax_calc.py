@@ -29,7 +29,7 @@ if sale < purchase + expenses:
     st.stop()
 
 st.caption(
-    f"Наценка: {sale / purchase * 100 :.0f}%, маржинальность: {(purchase + expenses) / sale * 100 :.0f}%."
+    f"Наценка: {sale / purchase * 100 :.0f}%, маржинальность: {(sale - purchase - expenses) / sale * 100 :.0f}%."
 )
 
 regimes = {
