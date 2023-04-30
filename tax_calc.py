@@ -15,7 +15,7 @@ st.caption(
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    purchase = st.number_input("Цена покупки", min_value=7_000_000, step=100_000)
+    purchase = st.number_input("Цена покупки", min_value=1_000_000, step=100_000)
 with col2:
     expenses = st.number_input("Расходы", value=1_000_000, step=100_000)
     confirmed_share = st.slider(
