@@ -22,7 +22,7 @@ with col2:
         "Процент расходов, подтвержденный чеками", value=50, max_value=100, step=10
     )
 with col3:
-    sale = st.number_input("Продажа", min_value=10_000_000, step=100_000)
+    sale = st.number_input("Продажа", min_value=1_000_000, step=100_000)
 
 if sale < purchase + expenses:
     st.error("Стоимость продажи должна быть больше суммы покупки и расходов")
